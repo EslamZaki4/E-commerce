@@ -1,0 +1,62 @@
+<!-- (click)="addNew() -->
+<button class="btn btn-primary"    (ngSubmit)="addNew()" >Save </button>
+
+
+<!-- i hade the Form by use[[#productForm= ===>"ngForm"]] -->
+<form class="card w-50 col-4 container d-flex" (ngSubmit)="addOrUpdate()" name="form1" #productForm="ngForm">
+
+
+
+
+  <label class="form-label"> Product Name : </label>                              <!--   // treat with it as a element in form -->
+      <input type="text" required minlength="3"  class="form-control" [(ngModel)] = "product.name" name="name" #productNameInput="ngModel"  [ngClass]="{'is-invalid':(productNameInput.touched||productNameInput.dirty)&&productNameInput.invalid}">
+
+<span class="invalid-feedback">
+                           <!-- saveNavigation -->
+  <span *ngIf="productNameInput.errors?.['required']">enter your product</span>
+<span *ngIf="productNameInput.errors?.['minlength']"> at least 3 charecter</span>
+</span>
+
+
+
+  <label class="form-label"> Product price : </label>
+  <input type="text" class="form-control" required minlength="3"      [(ngModel)] = "product.price" name="price" #productPriceInput="ngModel"  [ngClass]="{'is-invalid':(productPriceInput.touched||productPriceInput.dirty)&&productPriceInput.invalid}">
+  <span class="invalid-feedback">
+                       <!-- saveNavigation -->
+<span *ngIf="productPriceInput.errors?.['required']">enter your product</span>
+<span *ngIf="productPriceInput.errors?.['minlength']"> at least 3 charecter</span>
+</span>
+
+
+
+  <label class="form-label"> Product quantity : </label>
+      <input type="text"   class="form-control" required minlength="3"    [(ngModel)] = "product.quantity" name="qty" #productQuantityInput="ngModel"  [ngClass]="{'is-invalid':(productQuantityInput.touched||productQuantityInput.dirty)&&productQuantityInput.invalid}">
+      <span class="invalid-feedback">
+                        <!-- saveNavigation -->
+<span *ngIf="productQuantityInput.errors?.['required']">enter your product</span>
+<span *ngIf="productQuantityInput.errors?.['minlength']"> at least 3 charecter</span>
+</span>
+
+
+
+
+  <!-- <label> Product catId : </label>
+  <input type="text" [(ngModel)] = "product.catId" name="catid"> -->
+
+
+
+
+  <button class="btn btn-primary w-100 m-3 ms-0" name="btn" type="submit" [disabled]="productForm.invalid">Submit</button>
+  <button class="btn btn-danger  w-100 m-3 ms-0" name="btn" (click)="delPrd()">delete</button>
+
+ <button *ngIf="isEditing" class="btn btn-success w-100 m-3 ms-0" type="button" (click)="updateProduct()">
+    Update
+  </button>
+
+
+  </form>
+  <!-- <h2>Tocehd : {{productNameInput.touched|json}}</h2>
+  <h2>VAlid : {{productNameInput.valid|json}}</h2>
+  <h2>Dirty : {{productNameInput.dirty|json}}</h2>
+<h2>errors : {{productNameInput.errors|json}}</h2> -->
+  <!-- <h6 >{{product|json}}</h6> -->

@@ -1,0 +1,63 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+  <div class="row m-5 p-5">
+     <div class="col-6">
+<img [src]="product?.img" class="img-fluid" >
+     </div>
+<div class="col-6">
+
+
+  <div [ngSwitch]="product?.quantity">
+    <ng-container *ngSwitchCase="1">
+      <h4 class="found">Last One Item</h4>
+    </ng-container>
+    <ng-container *ngSwitchCase="2">
+      <h4 class="found"> Last Two Items</h4>
+    </ng-container>
+    <ng-container *ngSwitchCase="0">
+      <h4 class="found">Out of Stock</h4>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <h4 class="found">In Stock</h4>
+    </ng-container>
+  </div>
+
+<h2 class="text-bg-primary">  {{product?.name}}</h2>
+<!-- if custom pipe[use ngIf] -->
+ <h3 > Price :{{product?.price|currency}}</h3>
+<h5> quantity :{{product?.quantity}}</h5>
+<h5>{{product?.details}}</h5 >
+</div>
+
+</div>
+</div>
+
+<nav   class=" m-auto col-2"  aria-label="...">
+  <ul class="pagination">
+    <li class="page-item ">
+      <button class=" btn btn-primary" href="#"  [disabled]="this.currentProductIndex==0"   (click)="prevFunc()" >Previous</button>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active">
+      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <button class=" btn btn-danger"  [disabled]="this.currentProductIndex===(productIDSList.length-1)" (click)="nextFunc()">Next</button >
+    </li>
+  </ul>
+</nav>
+
+<button type="button" (click)="goBackFunc()" class="btn btn-danger">Back</button>
+

@@ -1,0 +1,124 @@
+
+
+<div class="search-container">
+  <input type="text"   #inputSearch  id="search-input" placeholder="Search...">
+  <button class="button-50" role="button" (click)="searchWithCategory(inputSearch.value)"  id="search-button">Search</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="flag" class="alert alert-primary text-bg-dark text-center border-1" role="alert">
+  Thanks you{{ clientName }}
+</div>
+
+<h1 class="text-center Choose ">Choose a Product </h1>
+
+
+<select class="form-select" aria-label="Default select example" appImgStyle [(ngModel)]="listFilterChild">
+  <option selected disabled>Open this select menu</option>
+
+<option *ngFor="let product of prdService.productList">{{product.price}}</option>
+</select>
+
+<br />
+
+
+
+<!-- ngswitch -->
+ <div class=" d-flex flex-wrap ">
+
+  <ng-container *ngFor="let prod of productListFilter">
+<!--
+    [class.tomato-background]="prod.quantity>=5" -->
+
+
+
+                 <!-- *ngIf="prod.quantity>0" -->   <!-- iam here sure if the quantity of product>0                                                           -->
+    <div class="  card col-4 p-4"  [ngClass]="{'lightblue-background':prod.quantity>=5,'bg-danger':prod.quantity==0}"    >
+      <img class="card-img-top" src="{{prod.img}}" appImgStyle>
+      <div class="card-body">
+        <h5 class="card-title"> id : {{prod.id}}</h5>
+        <h5 class="card-title">name : {{prod.name| uppercase}}</h5>
+        <h5 class="card-title">quantity : {{prod.quantity}}</h5>
+        <h5 class="card-title">Price : {{prod.price | currency:'EUR'}}</h5>
+
+        <p class="card-text"><small class="text-muted">  Last updated {{ myDate | date:'short' }}</small></p>
+<div class=" ">
+
+        <button type="button" class="btn btn-primary w-100" (click)="buy(prod)" [disabled]="prod.quantity==0">Buy</button>
+        <button type="button" class="btn btn-outline-danger w-100" (click)="AddToCart(prod)" >AddToCart</button>
+<!--                                                                                     i gave prod.uniqe -->
+        <!-- <button type="button" class="btn btn-outline-warning" [routerLink]="['/productDetails',prod.id]"  >Details</button> -->
+
+        <button type="button" class="btn btn-outline-warning w-100"   (click)="prodDetails(prod.id)  "      >Details</button>
+
+          <button class="btn btn-warning w-100 "  routerLink="/useTemplate/{{prod.id}}"> Edit </button>
+          <button class="btn btn-info w-100" routerLink="/useTemplate/{{prod.id}}"> Delete </button>
+
+          </div>
+        <!-- if...else(ng templete) -->
+        <h3 *ngIf="prod.quantity>0;else refnotfound">is found</h3>
+        <ng-template #refnotfound>not found</ng-template>
+         <div>{{clientName|credit }}</div>
+
+        <ng-container [ngSwitch]="prod.id">
+          <ng-container *ngSwitchCase="1">
+
+            <h4>Adidas</h4>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="2">
+
+            <h4>Nike</h4>
+
+          </ng-container>
+
+          <ng-container *ngSwitchCase="3">
+
+            <h4>New Balance</h4>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+
+            <p>This is default content</p>
+          </ng-container>
+        </ng-container>
+
+
+
+        <div [ngSwitch]="prod.quantity">
+          <ng-container *ngSwitchCase="1">
+            <h4 class="found">Last One Item</h4>
+          </ng-container>
+          <ng-container *ngSwitchCase="2">
+            <h4 class="found"> Last Two Items</h4>
+          </ng-container>
+          <ng-container *ngSwitchCase="0">
+            <h4 class="found">Out of Stock</h4>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <h4 class="found">In Stock</h4>
+          </ng-container>
+        </div>
+
+
+
+
+        <div *ngIf="!flag">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAdVBMVEX///8AAAD29vavr68jIyP8/Pzr6+smJiZBQUGLi4sKCgo5OTkUFBS4uLj4+Pi0tLTk5ORcXFxlZWXPz89TU1Px8fFra2uRkZFISEjn5+ekpKQODg6AgIDb29t3d3cfHx/Hx8czMzOcnJxPT0+WlpbJycmEhIRQQ1zTAAAEzUlEQVR4nO2b6XqqMBCGC4iIRRbFvWpd6v1f4lEnYZEECOJJfJ7v/VkJnSGZJZPJ1xcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGSso+t05AVjyxoH3mjqR0PdEnXAdqYDq8Jg6ti6JVNiko6rWhDjZKJburbMl4K5KM3L8hOmxfaDejXuBH6oW84mNodmNe4cHN2S1hKvStJ6iR/N1rbr2utZ5Cde6cdVrFtaOZttwajTTcXbDjdFJ7Dd6JCxBeE0F/J4ktjz/HTMn1q4/1fCdgy/MwFHtR52Msoe/DYwRO4yn+s1BooosxbPOEPZcW81vrZYL+FP5r1275dNhUwPb9ZuwIxPysGoORnydZXO2w6Zn7nqBtlJyO18rzJqz12DOb6L+11fbdiVe+H3SKXOppseuSaGpCvxtsO6Itjq2pph8Cy/SruMZRZ/7lumLrCF5bX2V0XmnjGLy6YIMm4ZP575I0UG+vcnPkly7TqexfhlnzJ1YU77Qa9zLAhpcQW6d79L+qAvFBQiesOlP5k6QbnJ6JVXUFow6Euibky6TIibRC+/o2/ShwxHtUH7J9s+Pl6S9CmXKjZtwU9Kg06P/Mp9+oO11emBHYohSh7nl1bSKg+gc/ocUc2gdzNVT052rH73XZiAVHsSTD5LpawzZDnJobidoizH61u69qxJKIUtXsgqKNtSRqP+np6JlL8k34I9+VpPswO+qvpNlphVMqvk8VfljVlvTBX/v8P0qJg1KTjtVTgVRmpuc8YKv6tKhum8nui8BC3t552ILQkrMat9CbZgM81ui0LCuvxH9yyu6NqUiViBoLYY0y/vkLEVtFSeJmBx+7QCWV2Ketb4V/Aim356h4ytINHKK/5ht8Ff5VlejhNGT5d+e4+ULRAowkoR4+dqwonp8SN8kW5FBEsrsYShgmWKspije2kJjN3lS8jaF2ZKlCkW0W3sQve75Jqk2VQJM8Uiut2vOCA6/MCTu2FxplgaojkgSlKUX94yMNgVHqtLCnWnKL7EgHf8OCr4/ZJnigV0J43SND474b25YWmmWGDQMGPvZkgiCkzYTjPnJc0Uc7RvrGq2urkbJmqL9dq3urXFh2VRD1GmmKO/+MDKQeKv7eR9J8JMMcOAclB9gS5zww11lgtFGa1HJOQ3ZSVT3tYhzhQzjhIv/j9pKECTG24Q0YgidtOxwt0NyzJFzrd2n3WH+Sapobr7w1r2G8ECpu6DHpsdvcm/ekOYC2lOtR+98UyqwZ7lmHIY+hWyIs/HH0/zNd6xYYA5aAMaBrIWji5tGC5r4ejU/tE7LzTVLFgmZkZTTdbmpNz9YFibU/ZhVTUxrvGsWyugy9U3qBUwq/dY5w7NmZ3c3buIVdtl/3hfqlntsoXGX+unRWwzt4H5Nid5m3jjVs/J288Nm487w0Lvfn2Tf+E2gFH2wcnckHW/diERcX455k+Zee3ihlO+CFPZiKxLF2ECY+JglfhsFfES35nF96tJ8czxk/JluNRA8yjgNFzd4wwMng4iXLa5vrc0YP/RiH1pmBXvon1f25ZJspVpsf2cK64PwmjhVbXwFtEnrKlnhhO/dA18YtDdHQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAOP4B2FYtD2Lvv6IAAAAASUVORK5CYII="
+            class="w-25 ">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

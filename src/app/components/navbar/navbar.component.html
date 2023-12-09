@@ -1,0 +1,64 @@
+<nav class="navbar ss  navbar-expand-lg bg-body-success">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="#">Store</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"   routerLinkActive="actv" [routerLink]="['/home']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"   routerLinkActive="actv"   [routerLink]="['/products']">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"    routerLinkActive="actv"  [routerLink]="['/productsParent']">ProductsParent</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"   routerLinkActive="actv"  [routerLink]="['/aboutus']">About Us</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link"   routerLinkActive="actv"  [hidden]="isUserLog" [routerLink]="['/userlogin']">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"   routerLinkActive="actv"   [hidden]="!isUserLog" [routerLink]="['/userlogout']">Logout</a>
+         </li>
+         <li class="nav-item">
+          <a class="nav-link"   routerLinkActive="actv"    [routerLink]="['/useTemplate/new']">Product Form</a>
+         </li>
+            <li class="nav-item">
+          <a class="nav-link"   routerLinkActive="actv"    [routerLink]="['/reactiveform']">Reactive Form</a>
+         </li>
+
+<!-- ......order lazy loading........ -->
+
+<li class="nav-item">
+  <a class="nav-link"   routerLinkActive="actv"    [routerLink]="['/orders/usercart']">usercart</a>
+ </li>
+
+ <li class="nav-item">
+  <a class="nav-link"   routerLinkActive="actv"    [routerLink]="['/orders/trackorder']">trackorder</a>
+ </li>
+
+<!-- ........userlogin lazyloading...... -->
+ <li class="nav-item">
+  <a class="nav-link"   routerLinkActive="actv"    [routerLink]="['User/login']">Login Lazy</a>
+ </li>
+
+ <li class="nav-item">
+  <a class="nav-link"   routerLinkActive="actv"    [routerLink]="['User/editprofile']">Edit Profile</a>
+ </li>
+
+ <li class="nav-item">
+  <a class="nav-link"   routerLinkActive="actv"    [routerLink]="['User/viewprofile']">View Profile</a>
+ </li>
+
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+

@@ -1,0 +1,78 @@
+<form  [formGroup]="userForm"  class="container mt-4">
+  <div class="mb-3">
+    <label for="fullName" class="form-label">Full Name:</label>
+    <input id="fullName" formControlName="fullName" class="form-control"   [ngClass]="{'is-invalid':(userForm.get('fullName')?.touched||userForm.get('fullName')?.dirty)&&userForm.get('fullName')?.invalid}"/>
+
+ <span class="invalid-feedback">
+  <span *ngIf="fullName?.errors?.['required']"><div class="alert alert-primary" role="alert">
+   Your Full Name  is Required
+               </div></span>
+  <span *ngIf="fullName?.errors?.['minlength']"><div class="alert alert-primary" role="alert">
+    Your Full Name is Atleast 5 letters
+               </div></span>
+</span>
+
+</div>
+
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email:</label>
+    <input id="email"  formControlName="email" class="form-control"  [ngClass]="{'is-invalid':(userForm.get('email')?.touched||userForm.get('email')?.dirty)&&userForm.get('email')?.invalid}" />
+
+   <span class="invalid-feedback">
+    <span *ngIf="email?.errors?.['required']"><div class="alert alert-primary" role="alert">
+  Email is Required
+             </div></span>
+    <span *ngIf="email?.errors?.['email']"><div class="alert alert-primary" role="alert">
+         invalid Email
+             </div></span>
+  </span>
+  </div>
+
+  <div class="mb-3">
+    <label for="mobileNumbers" class="form-label">mobileNumbers:</label>
+    <input id="mobileNumbers" formControlName="mobileNumbers" class="form-control"  [ngClass]="{'is-invalid':(userForm.get('mobileNumbers')?.touched||userForm.get('mobileNumbers')?.dirty)&&userForm.get('mobileNumbers')?.invalid}" />
+
+
+      <span class="invalid-feedback">
+
+        <span *ngIf="mobileNumbers?.errors?.['required']"><div class="alert alert-primary" role="alert">
+          MobileNumber  is required
+        </div></span>
+        <span *ngIf="mobileNumbers?.errors?.['pattern']"><div class="alert alert-primary" role="alert">
+ MobileNumber Must be 11 Numbers
+        </div></span>
+      </span>
+
+    </div>
+
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" id="password" formControlName="password" class="form-control"  [ngClass]="{'is-invalid':(userForm.get('password')?.touched||userForm.get('password')?.dirty)&&userForm.get('password')?.invalid}"   />
+    <span class="invalid-feedback">
+      <span *ngIf="password?.errors?.['required']"><div class="alert alert-primary" role="alert">
+        Password is Required
+      </div></span>
+      <span *ngIf="password?.errors?.['minlength']"><div class="alert alert-primary" role="alert">
+password At least 6 charecters
+      </div></span>
+    </span>
+
+</div>
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">Confirm Password:</label>
+    <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control"   [ngClass]="{'is-invalid':(userForm.get('confirmPassword')?.touched||userForm.get('confirmPassword')?.dirty)&&userForm.get('confirmPassword')?.invalid}"/>
+    <span class="invalid-feedback">
+
+      <span *ngIf="confirmPassword?.errors?.['required']"><div class="alert alert-primary" role="alert">
+        confirmPassword is Required
+      </div></span>
+    </span>
+    </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+<!-- <h1>{{userForm.value|json}}</h1> -->
+<!-- <h1>{{fullName?<div class="errors"></div>json}}</h1> -->
+
